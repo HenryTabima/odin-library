@@ -2,11 +2,6 @@ let myLibary = []
 const LIBRARY_KEY = 'books-libary'
 
 function main () {
-  // myLibary.push(new Book({
-  //   title: 'First title',
-  //   author: 'Me',
-  //   pages: 85
-  // }))
   loadLibrary()
   render()
 }

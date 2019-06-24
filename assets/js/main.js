@@ -1,9 +1,20 @@
 let myLibary = []
 
-function Book({title, author, pages}){
-  this.title = title
-  this.author = author
-  this.pages = pages
+function main () {
+  myLibary.push(new Book({
+    title: 'First title',
+    author: 'Me',
+    pages: 85
+  }))
+
+  render()
+}
+
+function Book({title, author, pages, read = false }){
+  this.title = title || 'No Title'
+  this.author = author || 'No Author'
+  this.pages = pages || 0
+  this.read = read
 }
 
 function getNodes(){
@@ -20,42 +31,52 @@ form.addEventListener('submit',(e)=>{
   addBook()
 })
 
-
 function addBook(){
-  const { $title, $author, $pages } = getNodes() 
+  const { $title, $author, $pages } = getNodes()
   let title = $title.value
   let author = $author.value
   let pages = $pages.value
 
   let book = new Book({title, author, pages})
   myLibary.push(book)
-  console.log(myLibary)
   form.reset()
   render()
 }
 
-function render(){
-  let book_list = document.getElementById('books-container')
-  const item = document.createElement('li')
-  item.innerHTML  = ''
-  myLibary.forEach((book)=>{
-     item.innerHTML = `
-      <li class="col-xs-4 mb-5">
-      <div class="card" style="width: 18rem;">
-        <div class="card-body">
-          <h4 class="card-title">${book.title}</h4>
-          <h5 class="">${book.author}</h5>
-          <h6 class="">${book.pages}</h6>
-          <a href="#" class="btn btn-primary"> read!</a>
-        </div>
-      </div>
-    </li>
-      `
-    book_list.appendChild(item)
-  })
-
-
+function deleteBook(index) {
+  myLibary.splice(index, 1)
+  render()
 }
 
+function updateBookReadState (index) {
+  myLibary[index].read = !myLibary[index].read
+  render()
+}
 
+function render(){
+  let $bookList = document.getElementById('books-container')
+  $bookList.innerHTML  = ''
+  myLibary.forEach((book, index)=>{
+    const item = document.createElement('li')
+    item.classList.add('col-4')
+    item.classList.add('my-2')
+    const btnType = book.read ? 'warning' : 'success'
+    const btnText = book.read ? 'Not read': 'Read'
+    const status = book.read ? 'Read' : 'Not Read'
+    item.innerHTML = `
+    <div class="card">
+      <div class="card-body">
+        <h4 class="card-title">${book.title}</h4>
+        <h5 class="">Author: ${book.author}</h5>
+        <h6 class="">Pages: ${book.pages}</h6>
+        <h6> status: ${status}</h6>
+        <a href="#" onClick="updateBookReadState(${index})" class="btn btn-${btnType}">${btnText}</a>
+        <a href="#" onClick="deleteBook(${index})" class="btn btn-danger">Delete</a>
+      </div>
+    </div>
+    `
+    $bookList.appendChild(item)
+  })
+}
 
+document.addEventListener('DOMContentLoaded', main)

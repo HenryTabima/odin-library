@@ -1,13 +1,22 @@
 let myLibary = []
+const LIBRARY_KEY = 'books-libary'
 
 function main () {
-  myLibary.push(new Book({
-    title: 'First title',
-    author: 'Me',
-    pages: 85
-  }))
-
+  // myLibary.push(new Book({
+  //   title: 'First title',
+  //   author: 'Me',
+  //   pages: 85
+  // }))
+  loadLibrary()
   render()
+}
+
+function loadLibrary () {
+  myLibary = JSON.parse(localStorage.getItem(LIBRARY_KEY) || '[]')
+}
+
+function saveLibrary () {
+  localStorage.setItem(LIBRARY_KEY, JSON.stringify(myLibary))
 }
 
 function Book({title, author, pages, read = false }){
@@ -40,16 +49,19 @@ function addBook(){
   let book = new Book({title, author, pages})
   myLibary.push(book)
   form.reset()
+  saveLibrary()
   render()
 }
 
 function deleteBook(index) {
   myLibary.splice(index, 1)
+  saveLibrary()
   render()
 }
 
 function updateBookReadState (index) {
   myLibary[index].read = !myLibary[index].read
+  saveLibrary()
   render()
 }
 
@@ -58,8 +70,7 @@ function render(){
   $bookList.innerHTML  = ''
   myLibary.forEach((book, index)=>{
     const item = document.createElement('li')
-    item.classList.add('col-4')
-    item.classList.add('my-2')
+    item.classList.add('col-4', 'my-2')
     const btnType = book.read ? 'warning' : 'success'
     const btnText = book.read ? 'Not read': 'Read'
     const status = book.read ? 'Read' : 'Not Read'

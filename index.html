@@ -1,28 +1,60 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Library</title>
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <link rel="stylesheet" href="assets/css/main.css">
 </head>
+
 <body>
   <main class="contianer">
     <h1 class="text-center my-3">Library</h1>
-    <ul id="books-container" class="row justify-content-center">
-      <li class="col-xs-4">
-        <div class="card" style="width: 18rem;">
-          <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            <a href="#" class="btn btn-primary">Go somewhere</a>
-          </div>
+    <!-- <div class="row container">
+      <button class="btn btn-primary btn-lg"> Add Book</button>
+    </div> -->
+    <div class="container">
+
+      <div class="row">
+        <div class="col-8">
+          <ul id="books-container" class="row justify-content-center">
+            <!-- <li class="col-xs-4">
+                  <div class="card" style="width: 18rem;">
+                    <div class="card-body">
+                      <h5 class="card-title">Card title</h5>
+                      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                      <a href="#" class="btn btn-primary">Go somewhere</a>
+                    </div>
+                  </div>
+                </li> -->
+          </ul>
         </div>
-      </li>
-    </ul>
+        <div class="col-4">
+          <form id="form">
+            <div class="form-group">
+              <label for="title">Book Title</label>
+              <input type="text" class="form-control" id="title" aria-describedby="emailHelp" placeholder="Book Title" required>
+            </div>
+            <div class="form-group">
+              <label for="author">Book Author</label>
+              <input type="text" class="form-control" id="author" placeholder="Book Author" required>
+            </div>
+            <div class="form-group">
+              <label for="pages">Number of Book Pages</label>
+              <input type="number" class="form-control" id="pages" placeholder="Book Pages" required>
+            </div>
+
+            <button id="submit" class="btn btn-primary btn-block">Add Book</button>
+          </form>
+        </div>
+      </div>
+    </div>
   </main>
   <script src="assets/js/main.js"></script>
 </body>
+
 </html>
